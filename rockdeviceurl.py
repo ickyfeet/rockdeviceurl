@@ -14,4 +14,4 @@ getkiosks = requests.get(kiosk_url, headers=apiheaders)
 parsed = json.loads(getkiosks.text)
 
 for i in parsed:
-    print(i["Name"] + "\n" + "https://rock.example.com/checkin?Kioskid=" + str(i["Id"]) + "rckipid=" + checkintoken + "\n")
+    print(i["Name"] + "\n" + "https://rock.example.com/checkin?Kioskid=" + str(i["Id"]) + "&rckipid=" + checkintoken + "\n")
