@@ -11,4 +11,4 @@ Pass the following arguments at the commandline, all are required:
 
 Usage:
 
-python3 rockdeviceurl -u 'https://rock.example.com' -k 'Rock API Key' -t 'Check in user token'
+python3 rockdeviceurl.py -u 'https://rock.example.com' -k 'Rock API Key' -t 'Check in user token'
