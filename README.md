@@ -1,9 +1,7 @@
 # rockdeviceurl
 Generates URLs for RockRMS check in devices
 
-Requires:
-    
-    requests
+Requires:  requests
 
 Pass the following arguments at the commandline, all are required:
 
