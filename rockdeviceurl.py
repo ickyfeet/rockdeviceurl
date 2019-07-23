@@ -1,17 +1,45 @@
-#!/usr/bin/python3
-
 import requests
 import json
+import argparse
 
-apiheaders = {'Content-Type': 'application/json', 'Authorization-Token': 'INSERT YOUR API TOKEN HERE'}
 
-kiosk_url = 'https://rock.example.com/api/Devices?$filter=IPAddress ne null and DeviceTypeValueId eq 41'
+# Initialize argparse
+parser = argparse.ArgumentParser()
 
-checkintoken = 'YOUR CHECKIN TOKEN HERE'
+parser.add_argument(
+    "-u",
+    "--url",
+    required=True,
+    type=str,
+    help="Rock base url. Example: https://rock.example.com",
+)
+
+parser.add_argument("-k", "--key", required=True, type=str, help="Rock api key.")
+
+parser.add_argument("-t", "--token", required=True, type=str, help="Rock user token")
+
+# Assign arguments to args
+args = parser.parse_args()
+
+
+apiheaders = {"Content-Type": "application/json", "Authorization-Token": args.key}
+
+kiosk_url = (
+    args.url + "/api/Devices?$filter=IPAddress ne null and DeviceTypeValueId eq 41"
+)
 
 getkiosks = requests.get(kiosk_url, headers=apiheaders)
 
 parsed = json.loads(getkiosks.text)
 
 for i in parsed:
-    print(i["Name"] + "\n" + "https://rock.example.com/checkin?Kioskid=" + str(i["Id"]) + "&rckipid=" + checkintoken + "\n")
+    print(
+        i["Name"]
+        + "\n"
+        + args.url
+        + "/checkin?Kioskid="
+        + str(i["Id"])
+        + "&rckipid="
+        + args.token
+        + "\n"
+    )
