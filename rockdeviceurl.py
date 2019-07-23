@@ -21,17 +21,20 @@ parser.add_argument("-t", "--token", required=True, type=str, help="Rock user to
 # Assign arguments to args
 args = parser.parse_args()
 
-
+#Set api header and device search url
 apiheaders = {"Content-Type": "application/json", "Authorization-Token": args.key}
 
 kiosk_url = (
     args.url + "/api/Devices?$filter=IPAddress ne null and DeviceTypeValueId eq 41"
 )
 
+#Request kiosk info
 getkiosks = requests.get(kiosk_url, headers=apiheaders)
 
+#Parse json
 parsed = json.loads(getkiosks.text)
 
+#Loop through devices and generate url
 for i in parsed:
     print(
         i["Name"]
